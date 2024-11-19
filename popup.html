@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    /* Mesmo CSS anterior, sem alterações */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #1c1c1c;
+      height: 300px;
+      width: 350px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .login-box {
+      width: 300px;
+      padding: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      background-color: #2e2e2e;
+      border: 1px solid #484848;
+      border-radius: 10px;
+      box-shadow: 
+        #00000012 0 1px 2px,
+        #00000012 0 2px 4px,
+        #00000012 0 4px 8px,
+        #00000012 0 8px 16px,
+        #00000012 0 16px 32px,
+        #00000012 0 32px 64px;
+      text-align: center;
+    }
+
+    .login-box h2 {
+      margin-bottom: 20px;
+      color: #fff;
+      font-size: 22px;
+    }
+
+    .login-box .user-box {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .login-box .user-box input {
+      width: 100%;
+      padding: 8px 0;
+      font-size: 14px;
+      color: #fff;
+      border: none;
+      border-bottom: 1px solid #fff;
+      outline: none;
+      background: transparent;
+      transition: 0.3s ease;
+    }
+
+    .login-box .user-box label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 8px 0;
+      font-size: 14px;
+      color: #fff;
+      pointer-events: none;
+      transition: 0.5s;
+    }
+
+    .login-box .user-box input:focus ~ label,
+    .login-box .user-box input:valid ~ label {
+      top: -18px;
+      left: 0;
+      color: #03e9f4;
+      font-size: 12px;
+    }
+
+    button {
+      width: 100%;
+      margin: 10px;
+      padding: 15px;
+      background-image: radial-gradient(372.37% 372.37% at 50% -10.53%,#FFFFFF 0%,rgba(217,217,217,0) 100%);
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #029dc9;
+    }
+
+    #logout {
+      background-color: #dc3545;
+    }
+
+    #logout:hover {
+      background-color: #c82333;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    #script-status {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #fff;
+      text-align: center;
+    }
+
+    label {
+      color: #fff;
+      font-size: 14px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .message {
+      margin-top: 10px;
+      color: red;
+      text-align: center;
+    }
+
+    #logout-section {
+      display: none;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Estilo para o toggle switch */
+    .slideThree {
+      width: 80px;
+      height: 26px;
+      background: #333;
+      margin: 20px auto;
+      position: relative;
+      border-radius: 50px;
+      box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
+    }
+
+    .slideThree:after {
+      content: 'OFF';
+      color: #fff;
+      position: absolute;
+      right: 10px;
+      z-index: 0;
+      font: 12px/26px Arial, sans-serif;
+      font-weight: bold;
+      text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.15);
+    }
+
+    .slideThree:before {
+      content: 'ON';
+      color: #03e9f4;
+      position: absolute;
+      left: 10px;
+      z-index: 0;
+      font: 12px/26px Arial, sans-serif;
+      font-weight: bold;
+    }
+
+    .slideThree label {
+      display: block;
+      width: 34px;
+      height: 20px;
+      cursor: pointer;
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      z-index: 1;
+      background: #ccc;
+      border-radius: 50px;
+      transition: all 0.4s ease;
+      box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+    }
+
+    .slideThree input[type=checkbox] {
+      visibility: hidden;
+    }
+
+    .slideThree input[type=checkbox]:checked + label {
+      left: 43px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    
+    <!-- Formulário de Login -->
+    <form id="login-form">
+      <h2>Iniciar Sessão</h2>
+      <div class="user-box">
+        <input type="text" id="username" required>
+        <label for="username">Usuário</label>
+      </div>
+      <div class="user-box">
+        <input type="password" id="password" required>
+        <label for="password">Senha</label>
+      </div>
+      <button type="submit">Entrar</button>
+    </form>
+
+    <!-- Seção de Logout e Ativação do Script -->
+    <div id="logout-section">
+      <div class="slideThree">  
+        <input type="checkbox" id="ativar-script" checked />
+        <label for="ativar-script"></label>
+      </div>
+      <p id="script-status"></p>
+      
+      <!-- Container para os botões de "Sair" e "Gráfico" -->
+      <div class="button-container">
+        <button id="grafico-button">Gráfico</button>
+        <button id="logout">Sair</button>
+      </div>
+    </div>
+
+    <!-- Mensagem para feedback -->
+    <div class="message" id="message"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
