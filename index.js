@@ -71,9 +71,7 @@ app.post("/login", async (req, res) => {
             return res.status(400).json({ message: "Usuário não encontrado" });
         }
 
-        if (user.allowedIP && user.allowedIP !== ipAddress) {
-            return res.status(403).json({ message: "Acesso negado: você está tentando acessar de um IP não autorizado." });
-        }
+
 
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) {
